@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+body {
+	font-size: 0.7em;
+}
+
+.informacion-producto {
+	border-top: 1px solid lightgray;
+	margin-top: 1em;
+	padding-top: 0.5em;
+}
+
+.informacion-producto p {
+	margin-bottom: 0.5em;
+}
+.descripcion {
+	color: gray;
+}
+
+.autor {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.precios span {
+	padding: 0.3em 0.5em;
+}
+
+.precio-con-descuento {
+	color: indianred;
+}
+
+.precio-sin-descuento {
+	color: gray;
+	position: relative;
+}
+
+.precio-sin-descuento:before {
+	position: absolute;
+    content: "";
+    left: 0;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid gray;
+     
+    transform:rotate(-10deg);
+}
+
+.descuento {
+	background-color: #ff5555;
+	color: white;
+}
+
+.favorito {
+	color: gray;
+}
