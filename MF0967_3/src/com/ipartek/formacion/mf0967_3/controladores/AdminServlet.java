@@ -16,7 +16,7 @@ public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Iterable<Libro> libros = LibrosServicioImpl.getInstance().getLibros();
+		Iterable<Libro> libros = LibrosServicioImpl.getInstance().getAll();
 
 		request.setAttribute("libros", libros);
 		

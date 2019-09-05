@@ -3,54 +3,26 @@ package com.ipartek.formacion.mf0967_3.accesodatos;
 import java.sql.*;
 
 public class Conexion {
-	private Connection con;
-	private Statement s;
-	public static void main(String[] args) {
-		try {
-			String uri = "jdbc:mysql://localhost:3307/libreria?serverTimezone=UTC";
-
-			try (Connection con = DriverManager.getConnection(uri, "root", "admin")) {
-
-				System.out.println("Conectado");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	protected Connection con=null;
+	private String user="root";
+	private String pass="admin";
 
 	public Conexion() {
-		try {
-			String uri = "jdbc:mysql://localhost:3307/libreria?serverTimezone=UTC";
-			
-			try (Connection con = DriverManager.getConnection(uri, "root", "admin")) {
-				this.con = con;
-				System.out.println("Conectado");
+			try{
+				new com.mysql.cj.jdbc.Driver();
+				String uri = "jdbc:mysql://localhost:3307/libreria?serverTimezone=UTC";
+				con = DriverManager.getConnection(uri,user,pass);
+				
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
-	public ResultSet SelectLibros(String tabla) {
-		try {
-			try (Statement s = this.con.createStatement()) {
 	
-				String sql = "SELECT * FROM " + tabla;
-	
-				try (ResultSet rs = s.executeQuery(sql)) {
-	
-					while (rs.next()) {
-						System.out.println(rs.getString("titulo") + ", " + rs.getString("autor"));
-	
-					}
-				}
-			}
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
 
-	}
 }
 //		try {
 //			String uri = "jdbc:mysql://localhost:3307/libreria?serverTimezone=UTC";

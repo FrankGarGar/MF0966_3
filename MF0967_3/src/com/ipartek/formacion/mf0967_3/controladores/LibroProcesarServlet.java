@@ -40,7 +40,7 @@ public class LibroProcesarServlet extends HttpServlet {
 		switch(op) {
 		case "borrar":
 			id = request.getParameter("id");
-			librosServicio.deleteLibro(Long.parseLong(id));
+			librosServicio.delete(Long.parseLong(id));
 			crearAlerta("Libro borrado correctamente", "success");
 			break;
 		case "modificar":
@@ -49,7 +49,7 @@ public class LibroProcesarServlet extends HttpServlet {
 				irAMostrarLibro(libro);
 				return;
 			}
-			librosServicio.updateLibro(libro);
+			librosServicio.update(libro);
 			crearAlerta("Libro modificado correctamente", "success");
 			break;
 		case "alta":
@@ -58,11 +58,11 @@ public class LibroProcesarServlet extends HttpServlet {
 				irAMostrarLibro(libro);
 				return;
 			}
-			librosServicio.insertLibro(libro);
-			crearAlerta("Libro aÃ±adido correctamente", "success");
+			librosServicio.insert(libro);
+			crearAlerta("Libro añadido correctamente", "success");
 			break;
 		default:
-			crearAlerta("OperaciÃ³n no reconocida", "danger");
+			crearAlerta("Operación no reconocida", "danger");
 			irAListado();
 			return;
 		}

@@ -1,22 +1,34 @@
 package com.ipartek.formacion.mf0967_3.accesodatos;
 
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.TreeMap;
 
+import com.ipartek.formacion.mf0967_3.modelo.Libro;
 import com.ipartek.formacion.mf0967_3.modelo.Login;
 
-public class LoginTreeMap implements LoginCrudAble {
+public class LoginTreeMap extends Conexion implements LoginCrudAble {
 
-	private static LoginTreeMap instancia = new LoginTreeMap();
+	private static LoginTreeMap instancia;
 	
 	public static LoginTreeMap getInstancia() {
-		return instancia;
+		return instancia = new LoginTreeMap();
 	}
 	
 	private TreeMap<Long, Login> logins = new TreeMap<>();
 	
 	private LoginTreeMap() {
-		logins.put(1L, new Login(1L, "javier@email.net", "contra"));
-		logins.put(2L, new Login(2L, "pepe@email.net", "perez"));
+		ResultSet ls = SelectUsuarios();
+		
+		try {
+			while (ls.next()) {
+				logins.put(ls.getLong("id"),new Login(ls.getString("usuario"),ls.getString("password")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -55,6 +67,36 @@ public class LoginTreeMap implements LoginCrudAble {
 		}
 		
 		return null;
+	}
+	public ResultSet SelectUsuarios() {
+		ResultSet rs = null;
+		Statement s = null;
+		try {
+			s = super.con.createStatement();
+			String sql = "SELECT * FROM usuarios";
+
+			try {
+				rs = s.executeQuery(sql);
+				return rs;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			s.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 }

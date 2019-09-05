@@ -18,7 +18,7 @@ public class ListadoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		Iterable<Libro> libros = LibrosServicioImpl.getInstance().getLibros();
+		Iterable<Libro> libros = LibrosServicioImpl.getInstance().getAll();
 
 		request.setAttribute("libros", libros);
 		

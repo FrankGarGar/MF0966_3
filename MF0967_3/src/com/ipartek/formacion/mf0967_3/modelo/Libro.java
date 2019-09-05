@@ -26,14 +26,14 @@ public class Libro {
 			BigDecimal p = new BigDecimal(precio);
 			setPrecio(p);
 		} catch (Exception e) {
-			setErrorPrecio("El precio debe ser un nÃºmero");
+			setErrorPrecio("El precio debe ser un número");
 		}
 
 		try {
 			BigDecimal d = new BigDecimal(descuento).divide(new BigDecimal(100));
 			setDescuento(d);
 		} catch (Exception e) {
-			setErrorDescuento("El descuento debe ser un nÃºmero");
+			setErrorDescuento("El descuento debe ser un número");
 		}
 	}
 	
@@ -91,7 +91,7 @@ public class Libro {
 	}
 	public void setDescuento(BigDecimal descuento) {
 		if(descuento == null || descuento.compareTo(new BigDecimal(0)) < 0 || descuento.compareTo(new BigDecimal(1)) > 0) {
-			setErrorDescuento("SÃ³lo se admiten descuentos positivos o 0 hasta el 100%");
+			setErrorDescuento("Sólo se admiten descuentos positivos o 0 hasta el 100%");
 		}
 		this.descuento = descuento;
 	}

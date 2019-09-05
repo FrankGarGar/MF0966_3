@@ -24,7 +24,7 @@ public class LibroServlet extends HttpServlet {
 
 			long l = Long.parseLong(id);
 			
-			libro = LibrosServicioImpl.getInstance().getLibro(l);
+			libro = LibrosServicioImpl.getInstance().getOne(l);
 		}
 		
 		request.setAttribute("libro", libro);

@@ -5,11 +5,15 @@ import com.ipartek.formacion.mf0967_3.modelo.Login;
 
 public class LoginServicioImpl implements LoginServicio {
 
-	private static LoginServicioImpl loginServicioImpl = new LoginServicioImpl();
-	
+	private static LoginServicioImpl loginServicioImpl;
 	private LoginServicioImpl() {}
 	
-	public static LoginServicioImpl getInstancia() { return loginServicioImpl; }
+	public static LoginServicioImpl getInstancia() { 
+		loginServicioImpl = new LoginServicioImpl();
+
+
+		return loginServicioImpl;
+	}
 	
 	@Override
 	public boolean autenticar(Login login) {
