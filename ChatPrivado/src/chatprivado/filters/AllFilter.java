@@ -12,26 +12,28 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
+import chatprivado.models.Usuario;
+
 
 @WebFilter(dispatcherTypes = {
 		DispatcherType.REQUEST, 
 		DispatcherType.FORWARD
 }
-			, urlPatterns = { "/usuario/*" })
+			, urlPatterns = { "/autenticado/*" })
 public class AllFilter implements Filter {
 
  
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// place your code here
-				HttpServletRequest httpRequest = (HttpServletRequest)request;
-				
-				//Usuario usuario = (Usuario) httpRequest.getSession().getAttribute("usuario");
-				
-//				if(usuario == null) {
-//					httpRequest.getRequestDispatcher("/login").forward(request, response);
-//					return;
-//				}
+		HttpServletRequest httpRequest = (HttpServletRequest)request;
+		Usuario userlog = (Usuario) httpRequest.getSession().getAttribute("userlog");
 		
+		if(userlog == null) {
+			httpRequest.getRequestDispatcher("/login").forward(request, response);
+			return;
+		}
+		//System.out.println(httpRequest.getServletPath());
+
 		chain.doFilter(request, response);
 	}
 

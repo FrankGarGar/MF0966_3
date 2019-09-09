@@ -16,29 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `zxcv_usuarios`
+-- Table structure for table `zxcv_mensajespublicos`
 --
 
-DROP TABLE IF EXISTS `zxcv_usuarios`;
+DROP TABLE IF EXISTS `zxcv_mensajespublicos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `zxcv_usuarios` (
-  `id_usuarios` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(15) COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `password` varchar(15) COLLATE utf8mb4_spanish2_ci NOT NULL,
-  PRIMARY KEY (`id_usuarios`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+CREATE TABLE `zxcv_mensajespublicos` (
+  `id` int(20) unsigned NOT NULL,
+  `mensaje` text COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `fecha` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_usuario_idx` (`id_usuario`),
+  CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `zxcv_usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `zxcv_usuarios`
+-- Dumping data for table `zxcv_mensajespublicos`
 --
 
-LOCK TABLES `zxcv_usuarios` WRITE;
-/*!40000 ALTER TABLE `zxcv_usuarios` DISABLE KEYS */;
-INSERT INTO `zxcv_usuarios` VALUES (1,'admin','admin');
-/*!40000 ALTER TABLE `zxcv_usuarios` ENABLE KEYS */;
+LOCK TABLES `zxcv_mensajespublicos` WRITE;
+/*!40000 ALTER TABLE `zxcv_mensajespublicos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zxcv_mensajespublicos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-06 14:26:11
+-- Dump completed on 2019-09-09 14:19:28

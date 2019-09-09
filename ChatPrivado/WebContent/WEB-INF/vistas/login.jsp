@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -32,9 +32,13 @@
 <link rel="stylesheet" href="resources/css/login.css">
 </head>
 <body>
-	<div class="">
-		<c:if test="${errorlog}">
-			<div class="alert alert-success" role="alert"></div>
+
+		<c:if test="${not empty errorlog}">
+			<div class="alert alert-danger alert-dismissible fade show myal" role="alert">${errorlog}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+			    </button>
+			</div>
 		</c:if>
 		<div class="container h-100">
 			<div class="d-flex justify-content-center h-100">
@@ -50,7 +54,7 @@
 								<div class="input-group-append">
 									<span class="input-group-text"><i class="fas fa-user"></i></span>
 								</div>
-								<input type="text" name="usuario" class="form-control input_user" placeholder="Usuario">
+								<input type="text" name="username" class="form-control input_user" placeholder="Usuario">
 							</div>
 							<div class="input-group mb-2">
 								<div class="input-group-append">
@@ -81,6 +85,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+
 </body>
 </html>

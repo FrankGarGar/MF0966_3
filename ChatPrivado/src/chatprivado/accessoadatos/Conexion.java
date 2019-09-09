@@ -8,7 +8,7 @@ public class Conexion {
 	protected static Connection conexion = null;
 	private String user = "root";
 	private String pass = "admin";
-	private String url = "jdbc:mysql://localhost:3307/chatpublico?serverTimezone=UTC";
+	private String url = "jdbc:mysql://localhost:3307/private_chat?serverTimezone=UTC";
 
 	public Conexion() {
 

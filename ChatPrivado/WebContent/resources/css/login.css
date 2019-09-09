@@ -89,3 +89,9 @@ body, html {
 	background-color: #c0392b;
 	border-radius: 200px;
 }
+.myal{
+	position: absolute;
+    width: 100%;
+    z-index: 9;
+    top: 0;
+}
