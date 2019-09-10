@@ -22,7 +22,7 @@ public class ListaUsuarios extends Conexion implements Procesos<Usuario>,ListaUs
 		try {
 			
 			while (rs.next()) {
-				usuarios.put(rs.getLong("id"),new Usuario(rs.getString("username"),rs.getString("password")));
+				usuarios.put(rs.getLong("id"),new Usuario(rs.getLong("id"),rs.getString("username"),rs.getString("password")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -40,7 +40,8 @@ public class ListaUsuarios extends Conexion implements Procesos<Usuario>,ListaUs
 		
 	}
 	@Override
-	public void insert(Usuario o) {
+	public boolean insert(Usuario o) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}
@@ -64,7 +65,7 @@ public class ListaUsuarios extends Conexion implements Procesos<Usuario>,ListaUs
 		Statement s = null;
 		String sql = "SELECT * FROM zxcv_usuarios";
 		try {
-			s = super.conexion.createStatement();
+			s = conexion.createStatement();
 			try {
 				rs = s.executeQuery(sql);
 				return rs;

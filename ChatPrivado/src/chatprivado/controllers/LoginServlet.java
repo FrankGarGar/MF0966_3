@@ -17,7 +17,6 @@ public class LoginServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(request.getSession().getAttribute("userlog"));
 		request.getRequestDispatcher("/WEB-INF/vistas/login.jsp").forward(request, response);
 	}
 
@@ -27,10 +26,12 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		Usuario userlog = new Usuario(username, password);
 		
-		if(LoginServicioImp.getInstancia().autenticar(userlog)) {
-			request.getSession().setAttribute("userlog", userlog);
+		Usuario user = LoginServicioImp.getInstancia().autenticar(new Usuario(username, password));
+		if(user!=null) {
+			
+			
+			request.getSession().setAttribute("userlog", user);
 			response.sendRedirect("autenticado/chat");
 			//request.getRequestDispatcher("/login").forward(request, response);
 			

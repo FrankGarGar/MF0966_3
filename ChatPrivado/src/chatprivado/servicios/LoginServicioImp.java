@@ -11,15 +11,15 @@ public class LoginServicioImp implements LoginServicio{
 	
 	public static LoginServicioImp getInstancia() { return loginServicio; }
 	@Override
-	public boolean autenticar(Usuario usuario) {
+	public Usuario autenticar(Usuario usuario) {
 		
 		Usuario encontrado = ListaUsuarios.getInstancia().getByUsername(usuario.getUsername());
 		
 		if(encontrado != null && encontrado.getPassword().equals(usuario.getPassword())) {
-			return true;
+			return encontrado;
 		}else {
 
-			return false;
+			return null;
 		}
 	}
 }

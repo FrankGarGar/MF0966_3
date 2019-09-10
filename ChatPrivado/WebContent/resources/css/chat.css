@@ -187,3 +187,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a868', end
 	flex:1 1 0;
 	margin:0 10px 0 0 ;
 }
+.all-mj{
+	min-height: 315px;
+}
+.all-mj .message{
+	width: fit-content;
+    border-radius: 20px;
+    background-color: #8080806e;
+    padding: 10px;
+}
+.message .info,.message2 .info{
+	display: block;
+    font-weight: bold;
+    font-size: 16px;
+}
+.all-mj .message2{
+	width: fit-content;
+    border-radius: 20px;
+    background-color: #c533336e;;
+    padding: 10px;
+}
+.message2 .fecha,.message .fecha{
+	font-size: 12px;
+}

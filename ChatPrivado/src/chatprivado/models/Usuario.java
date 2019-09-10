@@ -14,6 +14,13 @@ public class Usuario {
 		setUsername(username);
 		setPassword(password);	
 	}
+	
+	public Usuario(String username) {
+		setUsername(username);
+	}
+	public Usuario(Long id) {
+		setId(id);
+	}
 	public Long getId() {
 		return id;
 	}
