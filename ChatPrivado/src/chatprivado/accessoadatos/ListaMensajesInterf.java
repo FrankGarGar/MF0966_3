@@ -1,5 +1,6 @@
 package chatprivado.accessoadatos;
 
-public interface ListaMensajesInterf {
-	
+public interface ListaMensajesInterf<T> {
+
+	public Iterable<T> getPrivados();
 }

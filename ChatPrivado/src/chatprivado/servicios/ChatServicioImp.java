@@ -32,8 +32,20 @@ private static ChatServicioImp chatServicio = new ChatServicioImp();
 	}
 	
 	@Override
-	public Iterable<Mensaje> DevolverMensajes() {
+	public Iterable<Mensaje> DevolverMensajesAll() {
 		Iterable<Mensaje> mensajes = ListaMensajes.getInstancia().getAll();
+		return mensajes;
+	}
+	public Iterable<Mensaje> DevolverMensajesPrivados(int idcreado,int idrecibido) {
+		Iterable<Mensaje> mensajes = ListaMensajes.getInstancia().getPrivados(idcreado,idrecibido);
+		return mensajes;
+	}
+	public Iterable<Mensaje> DevolverMensajesAllUsersNews(String cant) {
+		Iterable<Mensaje> mensajes = ListaMensajes.getInstancia().getNexts(cant);
+		return mensajes;
+	}
+	public Iterable<Mensaje> DevolverMensajesOneU(String cant) {
+		Iterable<Mensaje> mensajes = ListaMensajes.getInstancia().getNexts(cant);
 		return mensajes;
 	}
 }

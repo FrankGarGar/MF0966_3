@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class Conexion {
 	protected static Connection conexion = null;
-	private String user = "root";
-	private String pass = "admin";
+	private String user = "franchat";
+	private String pass = "franchat";
 	private String url = "jdbc:mysql://localhost:3307/private_chat?serverTimezone=UTC";
 
 	public Conexion() {

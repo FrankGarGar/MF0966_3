@@ -11,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import chatprivado.models.Usuario;
 
@@ -26,10 +27,11 @@ public class AllFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// place your code here
 		HttpServletRequest httpRequest = (HttpServletRequest)request;
+		HttpServletResponse httpResponse = (HttpServletResponse)response;
 		Usuario userlog = (Usuario) httpRequest.getSession().getAttribute("userlog");
 		
 		if(userlog == null) {
-			httpRequest.getRequestDispatcher("/login").forward(request, response);
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
 			return;
 		}
 		//System.out.println(httpRequest.getServletPath());

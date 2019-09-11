@@ -6,7 +6,7 @@
 
 <div class="contenedor">
 	<div class="menu d-flex justify-content-center align-items-center">
-		<span class="fbw">Bienvenido ${userlog.username}</span>
+		<span class="fbw" id="bienvenida" user="${userlog.username}">Bienvenido ${userlog.username}</span>
 		<h1>Chat Público</h1>
 		
 		<a class="fbw" href="autenticado/logout">Cerrar Sesión</a>

@@ -8,5 +8,6 @@ public interface ChatServicio {
 	public boolean EnviarMensaje(Mensaje msj);
 	public boolean RecibirMensaje();
 	public Iterable<Usuario> DevolverConectados();
-	public Iterable<Mensaje> DevolverMensajes();
+	public Iterable<Mensaje> DevolverMensajesAll();
+	public Iterable<Mensaje>DevolverMensajesPrivados(int idcreado,int idrecibido);
 }

@@ -4,13 +4,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.TreeMap;
 
 import chatprivado.models.Mensaje;
 import chatprivado.models.Usuario;
 
 public class ListaMensajes extends Conexion implements Procesos<Mensaje>{
+	@SuppressWarnings("unused")
 	private static ListaMensajes instancia;
 	
 	public static ListaMensajes getInstancia() {
@@ -20,13 +20,22 @@ public class ListaMensajes extends Conexion implements Procesos<Mensaje>{
 
 	@Override
 	public Iterable<Mensaje> getAll() {
+		ResultSet rs = SelectMensajes();
+		try {
+			while (rs.next()) {
+				Mensaje mensaje = new Mensaje(rs.getString("mensaje"),new Usuario(rs.getString("username")),rs.getTimestamp("fecha"));
+				mensajes.put(rs.getLong("idm"),mensaje);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return mensajes.values();
 		
 	}
-	private ListaMensajes() {
-		ResultSet rs = SelectMensajes();
+	public Iterable<Mensaje> getPrivados(int idcreado,int idrecibido) {
+		ResultSet rs = SelectMensajesPrivados(idcreado,idrecibido);
+		
 		try {
-			System.out.println();
 			while (rs.next()) {
 				Mensaje mensaje = new Mensaje(rs.getString("mensaje"),new Usuario(rs.getString("username")),rs.getTimestamp("fecha"));
 				
@@ -35,6 +44,25 @@ public class ListaMensajes extends Conexion implements Procesos<Mensaje>{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return mensajes.values();
+	}
+	public Iterable<Mensaje> getNexts(String cant) {
+		int c = Integer.parseInt(cant);
+		ResultSet rs = SelectNewMessages(c);
+		try {
+			while (rs.next()) {
+				Mensaje mensaje = new Mensaje(rs.getString("mensaje"),new Usuario(rs.getString("username")),rs.getTimestamp("fecha"));
+				
+				mensajes.put(rs.getLong("idm"),mensaje);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return mensajes.values();
+		
+	}
+	private ListaMensajes() {
+		
 	}
 	@Override
 	public Mensaje getById(Long id) {
@@ -80,13 +108,61 @@ public class ListaMensajes extends Conexion implements Procesos<Mensaje>{
 	
 	public ResultSet SelectMensajes() {
 		ResultSet rs = null;
-		Statement s = null;
+		PreparedStatement s = null;
 		String sql = "SELECT us.id as idu,us.username,mp.id as idm,mp.mensaje,mp.fecha FROM zxcv_usuarios us INNER JOIN zxcv_mensajespublicos mp ON us.id=mp.id_usuario ORDER BY fecha ASC";
 		try {
-			s = conexion.createStatement();
+			s = conexion.prepareStatement(sql);
 			try {
-				rs = s.executeQuery(sql);
 				
+				rs = s.executeQuery();
+				
+				return rs;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public ResultSet SelectMensajesPrivados(int idcreado, int idrecibido) {
+		ResultSet rs = null;
+		PreparedStatement s = null;
+		String sql = "SELECT us.id as idu,us.username,mp.id as idm,mp.mensaje,mp.fecha FROM zxcv_usuarios us INNER JOIN zxcv_mensajesprivados mp ON us.id=mp.id_creado WHERE ( mp.id_creado=" + idcreado + " AND mp.id_recibido=" + idrecibido + ") OR (mp.id_recibido=" + idcreado + " AND mp.id_creado=" + idrecibido + ") ORDER BY fecha DESC";
+		try {
+			s = conexion.prepareStatement(sql);
+			try {
+				
+				rs = s.executeQuery();
+				
+				return rs;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public ResultSet SelectNewMessages(int cant) {
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+		PreparedStatement s = null;
+		Statement st=null;
+		String sql = "SELECT us.id as idu,us.username,mp.id as idm,mp.mensaje,mp.fecha FROM zxcv_usuarios us INNER JOIN zxcv_mensajespublicos mp ON us.id=mp.id_usuario ORDER BY fecha DESC LIMIT ?";
+		String sql2 = "SELECT COUNT(id) as n FROM zxcv_mensajespublicos";
+		try {
+			st = conexion.createStatement();
+			rs2 = st.executeQuery(sql2);
+			rs2.next();
+			int lim = rs2.getInt("n");
+			s = conexion.prepareStatement(sql);
+			try {
+				s.setInt(1, lim-cant);
+				rs = s.executeQuery();
+				rs2.close();
+				st.close();
+			
 				return rs;
 			} catch (SQLException e) {
 				e.printStackTrace();

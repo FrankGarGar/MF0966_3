@@ -100,7 +100,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a868', end
 	padding: 0;
     margin: 0;
 }
-.list-users .li-user{
+.list-users .li-user,.list-users .li-all-users{
 	padding: 10px 20px;
     background-color: #52a989;
     margin: 5px;
@@ -114,22 +114,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a868', end
     transition:all 1s ease;
     text-align:left;
 }
-.list-users .li-user:hover{
+.list-users .li-all-users{
+	font-size:22px;
+	text-align:center;
+}
+.list-users .li-user:hover,.list-users .li-all-users:hover{
 	font-size:20px;
 	box-shadow:1px 1px grey;
 }
-.list-users .li-user:hover .username{
+.list-users .li-user:hover .username,.list-users .li-all-users .username{
 	float:right;
 	transition:all 1s;
 }
 .list-users .hide{
 	display:none;
 }
-.list-users .li-user:hover .icono .hide{
+.list-users .li-user:hover .icono .hide,.list-users .li-all-users:hover .icono .hide{
 	
 	display: inline-block;
 }
-.list-users .li-user:hover .icono .show{
+.list-users .li-user:hover .icono .show,.list-users .li-all-users:hover .icono .show{
 	display:none;
 }
 .campo-mensaje{
@@ -209,4 +213,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a868', end
 }
 .message2 .fecha,.message .fecha{
 	font-size: 12px;
+}
+.message .info .username{
+	text-transform:capitalize;
 }

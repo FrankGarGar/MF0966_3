@@ -5,7 +5,7 @@
 		<c:forEach items="${mensajes}" var="mensaje">
 			<c:choose>
 				<c:when test="${mensaje.usuario.username != userlog.username}">
-					<p class="message">
+					<p class="message mm">
 						<span class="info">
 							<span class="fecha">${mensaje.fecha }</span>
 							<span class="username">${mensaje.usuario.username}:</span>
@@ -14,7 +14,7 @@
 					</p>
 				</c:when>
 				<c:otherwise>
-			       <p class="message2">
+			       <p class="message2 mm">
 						<span class="info">
 							<span class="fecha">${mensaje.fecha }</span>
 							<span class="username">Tu:</span>

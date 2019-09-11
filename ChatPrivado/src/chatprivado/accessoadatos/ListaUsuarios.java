@@ -5,6 +5,7 @@ import java.sql.*;
 import chatprivado.models.Usuario;
 
 public class ListaUsuarios extends Conexion implements Procesos<Usuario>,ListaUsuariosInterf<Usuario>{
+	@SuppressWarnings("unused")
 	private static ListaUsuarios instancia;
 	
 	public static ListaUsuarios getInstancia() {
