@@ -1,0 +1,10 @@
+/*EJERCICIO DE BASE DE DATOS DE EMPADRONAMIENTO*/
+USE empadronamiento;
+
+/*Queremos poder consultar las direcciones y números de las viviendas propiedad de una persona según su DNI.*/
+
+SELECT v.datoscalle,v.numero,p.nombres,p.apellidos,m.nombre as 'Municipio' FROM viviendas v INNER JOIN personas p ON p.id=v.persona_id INNER JOIN municipios m ON v.municipio_id=m.id WHERE DNI = '12321Q';
+
+/*Necesitamos los nombres y apellidos de los propietarios de un municipio determinado.*/
+
+SELECT p.nombres,p.apellidos FROM viviendas v INNER JOIN personas p ON p.id=v.persona_id INNER JOIN municipios m ON  m.id=v.municipio_id WHERE m.nombre='Vermeo' GROUP BY p.nombres;
