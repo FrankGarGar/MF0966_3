@@ -92,3 +92,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+INSERT INTO `empadronamiento`.`viviendas` (`codigo`, `datoscalle`, `numero`, `dueno_id`, `municipio_id`) VALUES ('QWE', 'calle 1 nuevo  N5 2A', '122323242', '1', '1');
+INSERT INTO `empadronamiento`.`viviendas` (`codigo`, `datoscalle`, `numero`, `dueno_id`, `municipio_id`) VALUES ('QASD', 'calle 2 viejo N2 1B', '12455223', '1', '2');
+INSERT INTO `empadronamiento`.`viviendas` (`codigo`, `datoscalle`, `numero`, `dueno_id`, `municipio_id`) VALUES ('ZXCZ', 'calle 3 Nuevo N 3 4A', '4412221', '1', '1');
+INSERT INTO `empadronamiento`.`viviendas` (`id`) VALUES ('AZXS');
