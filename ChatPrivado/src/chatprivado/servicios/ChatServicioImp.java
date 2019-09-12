@@ -18,7 +18,12 @@ private static ChatServicioImp chatServicio = new ChatServicioImp();
 		}
 		return false;
 	}
-
+	public boolean EnviarMensajePrivado(Mensaje msj,int idreceptor) {
+		if(ListaMensajes.getInstancia().insertPrivado(msj,idreceptor)) {
+			return true;
+		}
+		return false;
+	}
 	@Override
 	public boolean RecibirMensaje() {
 		// TODO Auto-generated method stub
@@ -44,8 +49,8 @@ private static ChatServicioImp chatServicio = new ChatServicioImp();
 		Iterable<Mensaje> mensajes = ListaMensajes.getInstancia().getNexts(cant);
 		return mensajes;
 	}
-	public Iterable<Mensaje> DevolverMensajesOneU(String cant) {
-		Iterable<Mensaje> mensajes = ListaMensajes.getInstancia().getNexts(cant);
+	public Iterable<Mensaje> DevolverMensajesOneU(int cant,int idrec,int idlog) {
+		Iterable<Mensaje> mensajes = ListaMensajes.getInstancia().getNextsPrivados(cant,idrec,idlog);
 		return mensajes;
 	}
 }

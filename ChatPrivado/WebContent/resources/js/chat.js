@@ -41,42 +41,58 @@ $(document).ready(function(){
 		cant = $("#all-mj .mm").length;
 		
 		if(msj!=""){
-			$.post("autenticado/chat",{msj:msj,cant:cant})
-			.done(function(data2) {
-				if(data2!="2"){
-					$("#send-pm")[0].reset();
-					var mensajes = JSON.parse(data2);
-					var name,clase;
-					$.each(mensajes, function(idx, msj) {
-						
-						if(msj.usuario.username===userlog){
-							clase="message2";
-							name= " Tu";
-						}else{
-							clase="message";
-							name= " " + msj.usuario.username;
-						}
-						$("#all-mj").append('<p class="' + clase + ' mm"><span class="info"><span class="fecha">'+ msj.fecha +'</span><span class="username">'+ name +'</span></span>' + msj.mensaje + '</p>');
-					});
-					
-					
-				}else{
-					console.log(data2);
-				}
-				
-			}).fail(function() {
-			    
-			});
+			if(activo){
+				$.post("autenticado/chat",{msj:msj,cant:cant})
+				.done(function(data2) {
+					if(data2!="2"){
+						$("#send-pm")[0].reset();
+						var mensajes = JSON.parse(data2);
+						var name,clase;
+						$.each(mensajes, function(idx, msj) {
+							
+							if(msj.usuario.username===userlog){
+								clase="message2";
+								name= " Tu";
+							}else{
+								clase="message";
+								name= " " + msj.usuario.username;
+							}
+							$("#all-mj").append('<p class="' + clase + ' mm"><span class="info"><span class="fecha">'+ msj.fecha +'</span><span class="username">'+ name +'</span></span>' + msj.mensaje + '</p>');
+						});
+					}
+				}).fail(function() {});
+			}else{
+				$.post("autenticado/chat",{msj:msj,cant:cant,userchat:usertochat})
+				.done(function(data2) {
+					if(data2!="2"){
+						$("#send-pm")[0].reset();
+						var mensajes = JSON.parse(data2);
+						var name,clase;
+						$.each(mensajes, function(idx, msj) {
+							
+							if(msj.usuario.username===userlog){
+								clase="message2";
+								name= " Tu";
+							}else{
+								clase="message";
+								name= " " + msj.usuario.username;
+							}
+							$("#all-mj").append('<p class="' + clase + ' mm"><span class="info"><span class="fecha">'+ msj.fecha +'</span><span class="username">'+ name +'</span></span>' + msj.mensaje + '</p>');
+						});
+					}
+				}).fail(function() {});
+			}
 		}
+		
 		
 	});
 	window.setInterval(function(){
 		if(activo){
 			cant = $("#all-mj .mm").length;
+			console.log(cant);
 			$.post("autenticado/chat",{cant:cant,recarga:true})
 			.done(function(data2) {
 				if(data2!="2"){
-					$("#send-pm")[0].reset();
 					var mensajes = JSON.parse(data2);
 					var name,clase;
 					$.each(mensajes, function(idx, msj) {
@@ -137,6 +153,26 @@ $(document).ready(function(){
 		activo=true;
 		if(usertochat!=$(this).data("user")){
 			usertochat= $(this).data("user");
+			$.post("autenticado/chat",{recarga:true,cant:0})
+			.done(function(data2) {
+				if(data2!="2"){
+					$("#send-pm")[0].reset();
+					$("#all-mj").empty();
+					var mensajes = JSON.parse(data2);
+					var name,clase;
+					$.each(mensajes, function(idx, msj) {
+						
+						if(msj.usuario.username===userlog){
+							clase="message2";
+							name= " Tu";
+						}else{
+							clase="message";
+							name= " " + msj.usuario.username;
+						}
+						$("#all-mj").append('<p class="' + clase + ' mm"><span class="info"><span class="fecha">'+ msj.fecha +'</span><span class="username">'+ name +'</span></span>' + msj.mensaje + '</p>');
+					});
+				}
+			}).fail(function() {});
 		}
 		
 		

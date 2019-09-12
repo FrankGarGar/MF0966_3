@@ -38,19 +38,34 @@ public class ChatServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("userlog")!=null) {
 			Usuario userlog = (Usuario) request.getSession().getAttribute("userlog");
-		
-			if(request.getParameter("msj")!="" && request.getParameter("msj")!=null && request.getParameter("cant")!=null) {
+			
+			//Proceso para enviar mensaje y actualiza el chat
+			if(request.getParameter("msj")!=null && request.getParameter("cant")!=null) {
 				Date date= new Date();
 				long time = date.getTime();
 				Timestamp ts = new Timestamp(time);
-				if(ChatServicioImp.getInstancia().EnviarMensaje(new Mensaje(request.getParameter("msj"),userlog,ts))) {
-					
-					Iterable<Mensaje> mensajes = ChatServicioImp.getInstancia().DevolverMensajesAllUsersNews(request.getParameter("cant"));
-					Gson gson = new Gson();
-					response.getWriter().append(gson.toJson(mensajes));
+				//si el mensaje a enviar es privado o publico
+				if(request.getParameter("userchat")!=null) {
+					int idreceptor= Integer.parseInt(request.getParameter("userchat"));
+					if(ChatServicioImp.getInstancia().EnviarMensajePrivado(new Mensaje(request.getParameter("msj"),userlog,ts),idreceptor)) {
+						
+						Iterable<Mensaje> mensajes = ChatServicioImp.getInstancia().DevolverMensajesOneU(Integer.parseInt(request.getParameter("cant")),idreceptor,userlog.getId().intValue());
+						Gson gson = new Gson();
+						response.getWriter().append(gson.toJson(mensajes));
+					}else {
+						response.getWriter().append("2");
+					}
 				}else {
-					response.getWriter().append("2");
+					if(ChatServicioImp.getInstancia().EnviarMensaje(new Mensaje(request.getParameter("msj"),userlog,ts))) {
+						
+						Iterable<Mensaje> mensajes = ChatServicioImp.getInstancia().DevolverMensajesAllUsersNews(request.getParameter("cant"));
+						Gson gson = new Gson();
+						response.getWriter().append(gson.toJson(mensajes));
+					}else {
+						response.getWriter().append("2");
+					}
 				}
+				
 			}
 			if(request.getParameter("recarga") != null && request.getParameter("cant")!=null) {
 				Iterable<Mensaje> mensajes = ChatServicioImp.getInstancia().DevolverMensajesAllUsersNews(request.getParameter("cant"));
