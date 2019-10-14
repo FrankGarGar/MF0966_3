@@ -14,9 +14,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="persona : ${personas}">
+			<tr>
 				<td th:text="${persona.id}"></td>
-				<td><a href="#" th:text="${persona.nombre}"></a></td>
+				<td th:text="${persona.nombre}"></td>
 				<td th:text="${persona.apellidos}"></td>
 			</tr>
 		</tbody>

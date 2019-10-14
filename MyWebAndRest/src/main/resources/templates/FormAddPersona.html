@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<style>
+body{
+font-family: monospace;
+}
+h1{
+	text-align:center;
+}
+form{
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+ }
+ input{
+ 	background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid;
+    border-color: lightgray;
+    font-size: 18px;
+    margin: 10px;
+ }
+ label{
+ 	font-weight: bold;
+    font-size: 18px;
+    font-family: monospace;
+ }
+ form div{
+     width: 50%;
+    text-align: left;
+    margin: 0 auto;
+}
+.boton-default{
+background-color: #55bfe2;
+    border-radius: 5px;
+    box-shadow: -3px 2px 3px 0px #000000;
+    padding: 10px;
+    font-weight: bold;
+}
+</style>
+<h1>Agregar nueva persona</h1>
+	<form action="persona" method="POST">
+		<div class="">
+			<label for="Nombre">Nombre</label> <input type="text" name="nombre" id="Nombre" class="" required maxlenght="25">
+		</div>
+		<div class="">
+			<label for="Apellidos">Apellidos</label> <input type="text" name="apellidos" id="Apellidos" class="" required maxlenght="40">
+		</div>
+		<div class="">
+			<label for="Edad">Edad</label> <input type="number" name="edad" id="Edad" class="" required>
+		</div>
+		<input type="submit" value="Guardar" class="boton-default">
+	</form>
+
+</body>
+</html>
