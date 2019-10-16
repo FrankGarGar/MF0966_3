@@ -1,0 +1,82 @@
+@charset "UTF-8";
+.menu {
+	    background-color: #71abde;
+    width: 95%;
+    border-radius: 40px;
+    padding: 0 10px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.menu h1 {
+	flex: 1 1 0;
+	text-align: center;
+}
+
+.menu .fbw {
+	color: black;
+	font-weight: bold;
+	padding: 10px;
+}
+.menu li{
+	padding: 5px 15px;
+    font-size: 22px;
+    opacity:1;
+    transition:1s all ease;
+}
+.menu li:hover{
+	opacity:0.5;
+}
+.menu a {
+	color:black;
+	border-radius: 30px;
+}
+
+.menu a:hover {
+	text-decoration: none;
+}
+td .btn{
+	margin: 5px;
+}
+tr td, tr th{
+	text-align:center;
+}
+h2 a.add{
+	float: right;
+    text-decoration: none;
+    color: black;
+    cursor:pointer;
+}
+label,::placeholder{
+	font-weight:bold;
+	color:black;
+}
+.BookAdd{
+	margin-top: 20px;
+    box-shadow: 1px 1px 5px #71abde;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.cp{
+	cursor:pointer;
+}
+.fde{
+	display: inline-block;
+}
+.error-val{
+	    color: #da5e5e;
+}
+.ev{
+	border:1px solid #da5e5e;
+}
+.form-group .form-control{
+	color: black;
+}
+.h2btna{
+	min-height: 50px;
+    margin: 10px;
+}
