@@ -16,8 +16,15 @@ public @Data @NoArgsConstructor @AllArgsConstructor class Propietario {
 		setPassword(password2);
 		
 	}
-	public Propietario(Long id, String username, String nombre, String apellidos) {
+	public Propietario(Long id, String username2, String password2) {
 		setId(id);
+		setUsername(username2);
+		setPassword(password2);
+		
+	}
+	public Propietario(Long id, String username,String password, String nombre, String apellidos) {
+		setId(id);
+		setPassword(password);
 		setUsername(username);
 		setNombre(nombre);
 		setApellidos(apellidos);

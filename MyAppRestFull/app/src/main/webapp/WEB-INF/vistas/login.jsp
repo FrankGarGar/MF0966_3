@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <base href="${pageContext.request.contextPath}/" />
-<base href="${pageContext.request.contextPath}/" />
 <link rel="icon" href="_/img/favicon.png">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">

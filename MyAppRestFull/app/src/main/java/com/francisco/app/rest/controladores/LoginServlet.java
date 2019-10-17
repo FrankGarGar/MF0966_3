@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher requestDispatcherLogin = request.getRequestDispatcher(LOGIN_JSP);
 		BancoServiciosImpl servicioBanco = (BancoServiciosImpl) getServletContext().getAttribute("ServiciosBanco");
-		System.out.println(servicioBanco);
+
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		LoginForm loginForm = new LoginForm(username,password);
@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}else {
 				request.getSession().setAttribute("propietariolog", propietario);
-				request.getRequestDispatcher("/WEB-INF/vistas/opciones.jsp");
+				response.sendRedirect(request.getServletContext().getContextPath() + "/autenticado/home");
 				return;
 			}
 		}

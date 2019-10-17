@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.francisco.app.rest.Entidades.Cuenta;
+import com.francisco.app.rest.Entidades.Movimiento;
 import com.francisco.app.rest.Entidades.Propietario;
 
 public class PropietariosDAOMySQL implements DAO<Long, Propietario>{
@@ -63,7 +65,8 @@ public class PropietariosDAOMySQL implements DAO<Long, Propietario>{
 				ResultSet rs = cs.executeQuery();
 
 				if(rs.next()) {
-					Propietario propietario= new Propietario(new Long(rs.getInt("id")),rs.getString("username"),rs.getString("nombre"),rs.getString("apellidos"));
+					Propietario propietario= new Propietario(new Long(rs.getInt("id")),rs.getString("username"),rs.getString("password"),rs.getString("nombre"),rs.getString("apellidos"));
+					
 					if(propietario.getPassword().equals(password)) {
 						
 						return propietario;
@@ -78,6 +81,16 @@ public class PropietariosDAOMySQL implements DAO<Long, Propietario>{
 		} catch (SQLException e) {
 			throw new AccesoDatosException("Ha habido un error al cerrar la conexión a la base de datos", e);
 		}
+		return null;
+	}
+	@Override
+	public Iterable<Movimiento> getAllForOne(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Iterable<Cuenta> getCuentas(Long id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

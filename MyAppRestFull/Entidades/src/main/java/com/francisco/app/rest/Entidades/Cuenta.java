@@ -15,4 +15,9 @@ public @Data @NoArgsConstructor @AllArgsConstructor class Cuenta {
 	public String toString() {
 		return String.format("%s", iban);
 	}
+	public Cuenta(Long id , String iban) {
+		setId(id);
+		setIban(iban);
+		
+	}
 }

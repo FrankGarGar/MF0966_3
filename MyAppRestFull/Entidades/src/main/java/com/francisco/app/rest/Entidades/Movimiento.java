@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 public @Data @NoArgsConstructor @AllArgsConstructor class Movimiento {
 	private Long id;
 	private String concepto;
-	private Cuenta cuenta;
+	private Cuenta cuentaEnvio;
+	private Cuenta cuentaRecibio;
 	private Importe importe;
 	public String toString() {
-		return String.format("%s | %s | %s", cuenta, concepto, importe);
+		return String.format("%s | %s | %s | %s", cuentaEnvio, cuentaRecibio, concepto, importe);
 	}
+	
 }

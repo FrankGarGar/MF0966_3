@@ -54,17 +54,16 @@ public class BancoServiciosImpl implements BancoServicios {
 	}
 
 	@Override
-	public TreeMap<Long, Cuenta> getCuentasPropietario(String idpropietario) {
+	public Iterable<Cuenta> getCuentasPropietario(Long idpropietario) {
 
-		throw new UnsupportedOperationException("Operacion sin implementar");
+		return fabrica.getDAOBancoOperaciones().getCuentas(idpropietario);
 	}
 
 	@Override
 	public Iterable<Movimiento> getMovimientos(Long id) {
-
-		throw new UnsupportedOperationException("Operacion sin implementar");
+		return fabrica.getDAOBancoOperaciones().getAllForOne(id);
 	}
-
+	
 	@Override
 	public boolean transferencia(Long idCuentaOrigen, Long idCuentaDestino, String concepto, BigDecimal cantidad,
 			String divisa) {
@@ -78,7 +77,6 @@ public class BancoServiciosImpl implements BancoServicios {
 		throw new UnsupportedOperationException("Operacion sin implementar");
 	}
 	public Propietario autenticar(String username,String password) {
-		System.out.println("SI2");
 		return fabrica.getDAOPropietarioOperaciones().getByUsername(username,password);
 		
 	}

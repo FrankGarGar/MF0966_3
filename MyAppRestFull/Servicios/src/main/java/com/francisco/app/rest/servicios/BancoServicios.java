@@ -12,7 +12,7 @@ public interface BancoServicios {
 	public Propietario getPropietarioByName(String nombre);
 	public Propietario getPropietarioByCuenta(String iban);
 	public Cuenta getCuentaByIban(String iban);
-	public TreeMap<Long, Cuenta> getCuentasPropietario(String idpropietario);
+	public Iterable<Cuenta> getCuentasPropietario(Long idpropietario);
 	public Iterable<Movimiento> getMovimientos(Long id);
 	public boolean transferencia(Long idCuentaOrigen,Long idCuentaDestino,String concepto, BigDecimal cantidad,String divisa);
 	public Propietario Login(String username,String password);
